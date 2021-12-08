@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sergi\\Desktop\\C#\\Activitat04\\Activitat04.csproj": {}
+    "C:\\Users\\Sergi\\Desktop\\AngryBirds\\Activitat04.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sergi\\Desktop\\C#\\Activitat04\\Activitat04.csproj": {
+    "C:\\Users\\Sergi\\Desktop\\AngryBirds\\Activitat04.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sergi\\Desktop\\C#\\Activitat04\\Activitat04.csproj",
+        "projectUniqueName": "C:\\Users\\Sergi\\Desktop\\AngryBirds\\Activitat04.csproj",
         "projectName": "Activitat04",
-        "projectPath": "C:\\Users\\Sergi\\Desktop\\C#\\Activitat04\\Activitat04.csproj",
+        "projectPath": "C:\\Users\\Sergi\\Desktop\\AngryBirds\\Activitat04.csproj",
         "packagesPath": "C:\\Users\\Sergi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sergi\\Desktop\\C#\\Activitat04\\obj\\",
+        "outputPath": "C:\\Users\\Sergi\\Desktop\\AngryBirds\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sergi\\AppData\\Roaming\\NuGet\\NuGet.Config"

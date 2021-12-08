@@ -1,0 +1,15 @@
+C:\Users\Sergi\Desktop\AngryBirds\bin\Debug\net6.0\Activitat04.exe
+C:\Users\Sergi\Desktop\AngryBirds\bin\Debug\net6.0\Activitat04.deps.json
+C:\Users\Sergi\Desktop\AngryBirds\bin\Debug\net6.0\Activitat04.runtimeconfig.json
+C:\Users\Sergi\Desktop\AngryBirds\bin\Debug\net6.0\Activitat04.dll
+C:\Users\Sergi\Desktop\AngryBirds\bin\Debug\net6.0\ref\Activitat04.dll
+C:\Users\Sergi\Desktop\AngryBirds\bin\Debug\net6.0\Activitat04.pdb
+C:\Users\Sergi\Desktop\AngryBirds\obj\Debug\net6.0\Activitat04.csproj.AssemblyReference.cache
+C:\Users\Sergi\Desktop\AngryBirds\obj\Debug\net6.0\Activitat04.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sergi\Desktop\AngryBirds\obj\Debug\net6.0\Activitat04.AssemblyInfoInputs.cache
+C:\Users\Sergi\Desktop\AngryBirds\obj\Debug\net6.0\Activitat04.AssemblyInfo.cs
+C:\Users\Sergi\Desktop\AngryBirds\obj\Debug\net6.0\Activitat04.csproj.CoreCompileInputs.cache
+C:\Users\Sergi\Desktop\AngryBirds\obj\Debug\net6.0\Activitat04.dll
+C:\Users\Sergi\Desktop\AngryBirds\obj\Debug\net6.0\ref\Activitat04.dll
+C:\Users\Sergi\Desktop\AngryBirds\obj\Debug\net6.0\Activitat04.pdb
+C:\Users\Sergi\Desktop\AngryBirds\obj\Debug\net6.0\Activitat04.genruntimeconfig.cache

@@ -1,11 +1,45 @@
 ﻿using System;
 using System.Linq;
 
+public class Joc{
+    
+    public void start(){
+        string opcion;
+        do{
+            Console.WriteLine("Escoged número de Angry Birds: 1, 3 o 5");
+            opcion= Console.ReadLine();
+        }while(opcion!="1" && opcion!="3" && opcion!="5");
+        Jugador j1 = new Jugador();
+        j1.PreguntaNombre();
+        int turnos= int.Parse(opcion);
+    }
+}
+
+public class Jugador{
+    private string nombre;
+    
+    AngryBird [] jugador1=AsignarPajaros(pajarillos,turnos);
+  
+
+    public void PreguntaNombre(){
+        Console.WriteLine("Nombre del jugador:");
+        nombre =  Console.ReadLine();
+    }
+    
+}
+
+public class Enemigo{
+    private string nombreMaquina = "Roberto";
+     AngryBird [] jugador2=AsignarPajaros(pajarillos,turnos);
+}
+
+
 public class AngryBird {
-	public string nom;
-	public string especie;
-	public string poder;
-	public int energia;
+    private string nom;
+    private string especie;
+    private string poder;
+    private int energia;
+
 
 //Constructor
     public AngryBird(string name, string species, string power, int energy ){
@@ -15,19 +49,35 @@ public class AngryBird {
         energia = energy;
     }
 
-    public void MostarEnergia(){
-        Console.WriteLine(energia);
+    public int GetEnergia(){
+        return energia;
     }
+ 
 }
 
-class Program    {
-    static AngryBird [] ConstruirPajaros(string [] nombres,string [] especies,string [] poderes,int [] energia,int turnos){
+public class CreaMazo{
+    private string [] pajaros={"rojo","amarillo","azul","verde","negro","blanco","naranja","rosa","rojo"};
+    private string [] nombres={"Red","Chuck","Jay Jake y Jim","Hal","Bomb","Matilda","Bubbles","Stella","Terence"};
+    private string [] especies={"cardenal","canario","azulejo","tucán","cuervo","gallina","gorrión","cacatua Galah","cardenal"};
+    private string [] poderes={"none","velocidad","dividirse en tres","efecto bumerang","explotar","lanzar huevo explosivo","hincharse","hacer burbujas","su peso"};
+    private int [] energia={2,23,64,45,67,91,13,31,44};
+
+    AngryBird [] pajarillos=ConstruirPajaros(nombres,especies,poderes,energia,turnos);
+    static void ConstruirPajaros(string [] nombres,string [] especies,string [] poderes,int [] energia,int turnos){
         AngryBird [] pajarillos= new AngryBird[9];
         for (byte i=0;i<nombres.Length;i++){
             pajarillos[i]=new AngryBird(nombres[i],especies[i],poderes[i],energia[i]);
         }
-        return pajarillos;
     }
+}
+
+
+class Program {
+    static void Main(string[] args){
+    }
+    
+}
+    
     static AngryBird [] AsignarPajaros(AngryBird [] pajaros,int turnos){
             Random NumRandom = new Random();
             int [] NumRandoms=new int[turnos];
@@ -78,33 +128,19 @@ class Program    {
             Console.WriteLine();
         }
     }
-    static void Main(string[] args)
-    {
+    
         
-        string [] pajaros={"rojo","amarillo","azul","verde","negro","blanco","naranja","rosa","rojo"};
-        string [] nombres={"Red","Chuck","Jay Jake y Jim","Hal","Bomb","Matilda","Bubbles","Stella","Terence"};
-        string [] especies={"cardenal","canario","azulejo","tucán","cuervo","gallina","gorrión","cacatua Galah","cardenal"};
-        string [] poderes={"none","velocidad","dividirse en tres","efecto bumerang","explotar","lanzar huevo explosivo","hincharse","hacer burbujas","su peso"};
-        int [] energia={2,23,64,45,67,91,13,31,44};
+        Joc j = new Joc();
+        j.start();
+        
 
-        string opcion;
+       
 
-        do{
-            Console.WriteLine("Escoged número de Angry Birds: 1, 3 o 5");
-            opcion= Console.ReadLine();
-        }while(opcion!="1" && opcion!="3" && opcion!="5");
+        
 
-        Console.WriteLine("Nombre del jugador:");
-        string nombre1 =  Console.ReadLine();
+        
 
-        string nombreMaquina = "Roberto";
-
-        int turnos= int.Parse(opcion);
-
-        AngryBird [] pajarillos=ConstruirPajaros(nombres,especies,poderes,energia,turnos);
-
-        AngryBird [] jugador1=AsignarPajaros(pajarillos,turnos);
-        AngryBird [] jugador2=AsignarPajaros(pajarillos,turnos);
+        
 
         int contJug1=0;
         int contJug2=0;
@@ -163,4 +199,4 @@ class Program    {
     }
 
 }
-
+*/

@@ -3,9 +3,16 @@ using System.Linq;
 
 public class Joc{
 
-    public void Marcador(string jugador1,string jugador2, int contJugador1,int contJugador2){
+    private Jugador j1;
+    private Enemigo enemy;
+    private int turnos;
+    private AngryBird [] ArrayCartas;
+    private AngryBird [] mazoJugador;
+    private AngryBird [] mazoEnemigo;
+
+    public void Marcador(string jugador1,string nombreMaquina, int contJugador1,int contMaquina){
         Console.WriteLine(jugador1+":"+contJugador1);
-        Console.WriteLine(jugador2+":"+contJugador2);
+        Console.WriteLine(nombreMaquina+":"+contMaquina);
     }
 
     public void LimpiarPantalla(){
@@ -26,35 +33,42 @@ public class Joc{
 
         Cartas cartas= new Cartas();
 
-        AngryBird [] ArrayCartas = cartas.ConstruirPajaros();
+        ArrayCartas = cartas.ConstruirCartas();
 
-        AngryBird [] mazoJugador = cartas.AsignarMazo(ArrayCartas,turnos);
-        AngryBird [] mazoEnemigo = cartas.AsignarMazo(ArrayCartas,turnos);
+        mazoJugador = cartas.AsignarCartas(ArrayCartas,turnos);
+        mazoEnemigo = cartas.AsignarCartas(ArrayCartas,turnos);
 
-        Jugador j1 = new Jugador(mazoJugador);
+        j1 = new Jugador(mazoJugador);
+
         j1.PreguntaNombre();
 
-        Enemigo enemy= new Enemigo(mazoEnemigo);
+        enemy= new Enemigo(mazoEnemigo);
 
         int AngryEscogido1;
+        int contTurno=1;
 
         while (turnos!=0){
             do{
+                Console.WriteLine("TURNO "+contTurno);
                 AngryEscogido1= j1.EscogePajaro();
             }while(AngryEscogido1==-1);
 
             int AngryEscogido2=enemy.MaquinaEscoge();
 
-            Console.WriteLine("\nEnergia "+j1.GetNombre()+":");
-            Console.Write(mazoJugador[AngryEscogido1].GetEnergia());
+            LimpiarPantalla();
 
-            Console.WriteLine("\nEnergia "+enemy.GetNombre()+":");
-            Console.Write(mazoEnemigo[AngryEscogido2].GetEnergia());
+            Console.WriteLine(j1.GetNombre()+" invoca a "+j1.GetCartaMazo(AngryEscogido1).GetNom());
+            int energiaJugador=j1.GetCartaMazo(AngryEscogido1).GetEnergia();
+            Console.WriteLine("Energia "+j1.GetNombre()+": "+energiaJugador);
 
-            if (mazoJugador[AngryEscogido1].GetEnergia()>mazoEnemigo[AngryEscogido2].GetEnergia()){
+            Console.WriteLine("\n"+enemy.GetNombre()+" invoca a "+enemy.GetCartaMazo(AngryEscogido1).GetNom());
+            int energiaEnemigo=enemy.GetCartaMazo(AngryEscogido1).GetEnergia();
+            Console.WriteLine("Energia "+enemy.GetNombre()+": "+energiaEnemigo);
+
+            if (energiaJugador>energiaEnemigo){
                 Console.WriteLine("\nEste turno lo gana "+j1.GetNombre()+"\n");
                 j1.SetPuntuacion();
-            }else if (mazoJugador[AngryEscogido1].GetEnergia()<mazoEnemigo[AngryEscogido2].GetEnergia())
+            }else if (energiaJugador<energiaEnemigo)
             {
                 Console.WriteLine("\nEste turno lo gana "+enemy.GetNombre()+"\n");
                 enemy.SetPuntuacion();
@@ -63,12 +77,17 @@ public class Joc{
                 Console.WriteLine("\nEmpate! nadie suma punto\n");
             }
 
+            j1.SetCartaMazo(AngryEscogido1);
+            enemy.SetCartaMazo(AngryEscogido1);
+
+
             Marcador(j1.GetNombre(),enemy.GetNombre(),j1.GetPuntuacion(),enemy.GetPuntuacion());
             Console.ReadLine();
 
             LimpiarPantalla();
 
             turnos--;
+            contTurno++;
         }
 
         Console.WriteLine("\nFin de la partida!");
@@ -80,7 +99,7 @@ public class Joc{
             Console.WriteLine("\n"+enemy.GetNombre()+" ha ganado la partida!");
         }else
         {
-            Console.WriteLine("\nEMPATE :O !");
+            Console.WriteLine("\nEMPATE! :O ");
         }
 
 
@@ -114,6 +133,7 @@ public class AngryBird {
  
 }
 
+
 public class Cartas{
         private string [] nombres = {"Red","Chuck","Jay Jake y Jim","Hal","Bomb","Matilda","Bubbles","Stella","Terence"};
 
@@ -123,10 +143,8 @@ public class Cartas{
 
         private int [] energia={2,23,64,45,67,91,13,31,44};
 
-
-
     
-    public AngryBird [] ConstruirPajaros(){
+    public AngryBird [] ConstruirCartas(){
         AngryBird [] pajarillos= new AngryBird[9];
         for (byte i=0;i<this.nombres.Length;i++){
             pajarillos[i]=new AngryBird(this.nombres[i],this.especies[i],this.poderes[i],this.energia[i]);
@@ -134,12 +152,18 @@ public class Cartas{
         return pajarillos;
     }
 
-    public AngryBird [] AsignarMazo(AngryBird [] pajaros,int turnos){
+    public AngryBird [] AsignarCartas(AngryBird [] pajaros,int turnos){
         Random NumRandom = new Random();
         int [] NumRandoms=new int[turnos];
-
-        for (int i=0;i<turnos;i++){
-            NumRandoms[i]=NumRandom.Next(0,8);
+       
+        for(int i = 0; i < NumRandoms.Length; i++){
+            Boolean existeNumero;
+            int NumeroAleatorio;
+            do{
+                NumeroAleatorio= NumRandom.Next(0,8);
+                existeNumero = NumRandoms.Contains(NumeroAleatorio);
+            }while(existeNumero);
+            NumRandoms[i]=NumeroAleatorio;
         }
 
         AngryBird [] pajaritos= new AngryBird[turnos];
@@ -159,7 +183,7 @@ public class Jugador{
 
     private int puntuacion=0;
 
-    AngryBird [] Mazo;
+    private AngryBird [] Mazo;
     
     public Jugador(AngryBird [] Mazo){
         this.Mazo=Mazo;
@@ -171,9 +195,12 @@ public class Jugador{
     }
 
     public int EscogePajaro(){
-        Console.WriteLine("\nTe toca "+this.nombre+"\n");
+        Console.WriteLine("Te toca "+this.nombre+"\n");
+        AngryBird done=new AngryBird("","","",0);
         foreach (AngryBird element in this.Mazo){
+            if (element!=done){
                 Console.WriteLine(element.GetNom()+ "    |  energia: " + element.GetEnergia() );
+            }
         }
 
         Console.WriteLine("Escoge que Angry Bird quieres usar: ");
@@ -185,7 +212,6 @@ public class Jugador{
         }
         return -1;
     }
-
     public string GetNombre(){
         return nombre;
     }
@@ -198,6 +224,15 @@ public class Jugador{
         return puntuacion;
     }
     
+    public AngryBird GetCartaMazo(int posicion){
+        return Mazo[posicion];
+    }
+
+    public void SetCartaMazo(int posicion){
+        Mazo = Mazo.Where((source, index) =>index != posicion).ToArray();
+    }
+
+
 }
 
 
@@ -225,6 +260,14 @@ public class Enemigo{
 
     public int GetPuntuacion(){
         return puntuacion;
+    }
+
+    public AngryBird GetCartaMazo(int posicion){
+        return Mazo[posicion];
+    }
+
+    public void SetCartaMazo(int posicion){
+        Mazo = Mazo.Where((source, index) =>index != posicion).ToArray();
     }
 }
 

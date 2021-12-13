@@ -43,7 +43,9 @@ public class Joc{
         //CREAMOS LOS JUGADORAZOS
         j1 = new Jugador(mazoJugador);
 
-        j1.PreguntaNombre();
+        do{
+            j1.PreguntaNombre();
+        }while(j1.GetNombre()=="" || j1.GetNombre()==" ");
 
         enemy= new Enemigo(mazoEnemigo);
 
